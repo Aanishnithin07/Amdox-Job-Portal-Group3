@@ -4,27 +4,52 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    // Check if user is already logged in when page loads
+    // Check if user is already logged in when app loads
     useEffect(() => {
+        const storedToken = localStorage.getItem('token');
         const storedUser = localStorage.getItem('user');
-        if (storedUser) {
+        
+        if (storedToken && storedUser) {
+            setToken(storedToken);
             setUser(JSON.parse(storedUser));
         }
+        setLoading(false);
     }, []);
 
-    const login = (userData) => {
+    const login = (userData, authToken) => {
         setUser(userData);
+        setToken(authToken);
         localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('token', authToken);
     };
 
     const logout = () => {
         setUser(null);
+        setToken(null);
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
+    };
+
+    const updateUser = (updatedUserData) => {
+        setUser(updatedUserData);
+        localStorage.setItem('user', JSON.stringify(updatedUserData));
+    };
+
+    const value = {
+        user,
+        token,
+        loading,
+        login,
+        logout,
+        updateUser,
+        isAuthenticated: !!token
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     );

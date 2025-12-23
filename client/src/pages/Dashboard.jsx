@@ -1,53 +1,100 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import './Dashboard.css';
 
 const Dashboard = () => {
-    const { user, logout } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        logout();
-        navigate('/login');
-    };
-
     return (
-        <div style={styles.fullPage}>
-            <div style={styles.card}>
-                <h1 style={{ color: '#0d47a1' }}>Welcome to Job Portal</h1>
-                <hr />
-                {user ? (
-                    <div style={{ marginTop: '20px' }}>
-                        <p style={styles.successText}>Login Successful!</p>
-                        <p><strong>Username:</strong> {user.username}</p>
-                        <p><strong>Email:</strong> {user.email}</p>
-                        
-                        <div style={styles.statsContainer}>
-                            <div style={styles.statBox}><h3>10000+</h3><p>Jobs Available</p></div>
-                            <div style={styles.statBox}><h3>0</h3><p>Applied</p></div>
-                        </div>
+        <>
+            <Navbar />
+            <div className="dashboard-container">
+                <div className="dashboard-hero">
+                    <h1>Welcome Back, {user?.username}! 👋</h1>
+                    <p className="hero-subtitle">Ready to explore amazing opportunities?</p>
+                </div>
 
-                        <button onClick={handleLogout} style={styles.logoutBtn}>Logout</button>
+                <div className="dashboard-content">
+                    <div className="stats-grid">
+                        <div className="stat-card">
+                            <div className="stat-icon">💼</div>
+                            <h3>10,000+</h3>
+                            <p>Jobs Available</p>
+                        </div>
+                        <div className="stat-card">
+                            <div className="stat-icon">📝</div>
+                            <h3>0</h3>
+                            <p>Applications</p>
+                        </div>
+                        <div className="stat-card">
+                            <div className="stat-icon">⭐</div>
+                            <h3>0</h3>
+                            <p>Saved Jobs</p>
+                        </div>
+                        <div className="stat-card">
+                            <div className="stat-icon">📊</div>
+                            <h3>0</h3>
+                            <p>Interview Calls</p>
+                        </div>
                     </div>
-                ) : (
-                    <div>
-                        <p>User not found. Please register first.</p>
-                        <button onClick={() => navigate('/register')} style={styles.loginBtn}>Go to Register</button>
+
+                    <div className="quick-actions">
+                        <h2>Quick Actions</h2>
+                        <div className="actions-grid">
+                            <button 
+                                className="action-btn primary"
+                                onClick={() => navigate('/profile')}
+                            >
+                                <span className="action-icon">👤</span>
+                                <span className="action-text">
+                                    <strong>Complete Profile</strong>
+                                    <small>Add your skills and experience</small>
+                                </span>
+                            </button>
+                            <button className="action-btn">
+                                <span className="action-icon">🔍</span>
+                                <span className="action-text">
+                                    <strong>Browse Jobs</strong>
+                                    <small>Find your dream job</small>
+                                </span>
+                            </button>
+                            <button className="action-btn">
+                                <span className="action-icon">📄</span>
+                                <span className="action-text">
+                                    <strong>Upload Resume</strong>
+                                    <small>Stand out from the crowd</small>
+                                </span>
+                            </button>
+                            <button className="action-btn">
+                                <span className="action-icon">🎯</span>
+                                <span className="action-text">
+                                    <strong>Job Alerts</strong>
+                                    <small>Get notified instantly</small>
+                                </span>
+                            </button>
+                        </div>
                     </div>
-                )}
+
+                    <div className="recent-activity">
+                        <h2>Recent Activity</h2>
+                        <div className="activity-list">
+                            <div className="activity-empty">
+                                <span className="empty-icon">📭</span>
+                                <p>No recent activity yet</p>
+                                <small>Start applying to jobs to see your activity here</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
-const styles = {
-    fullPage: { height: '100vh', backgroundColor: '#e3f2fd', display: 'flex', justifyContent: 'center', alignItems: 'center' },
-    card: { background: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 8px 20px rgba(0,0,0,0.1)', textAlign: 'center', width: '450px' },
-    successText: { color: 'green', fontWeight: 'bold', fontSize: '18px' },
-    statsContainer: { display: 'flex', justifyContent: 'space-around', margin: '30px 0' },
-    statBox: { padding: '15px', backgroundColor: '#f0f4f8', borderRadius: '8px', width: '40%' },
-    logoutBtn: { backgroundColor: '#d32f2f', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer' },
-    loginBtn: { backgroundColor: '#1976d2', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer' }
+export default Dashboard;
 };
 
 export default Dashboard;

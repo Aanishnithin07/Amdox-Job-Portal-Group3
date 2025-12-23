@@ -1,20 +1,41 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { authAPI } from '../services/api';
+import './Register.css';
 
 const Register = () => {
-    const [formData, setFormData] = useState({ username: '', email: '', password: '' });
+    const [formData, setFormData] = useState({ 
+        username: '', 
+        email: '', 
+        password: '',
+        role: 'job_seeker'
+    });
     const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
-    const [msg, setMsg] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [successMsg, setSuccessMsg] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
     const navigate = useNavigate();
 
     const validate = () => {
         let tempErrors = {};
-        if (!formData.email.endsWith('@gmail.com')) tempErrors.email = "Incorrect mail (must be @gmail.com)";
+        
+        if (!formData.username.trim()) {
+            tempErrors.username = "Username is required";
+        } else if (formData.username.length < 3) {
+            tempErrors.username = "Username must be at least 3 characters";
+        }
+
+        if (!formData.email.endsWith('@gmail.com')) {
+            tempErrors.email = "Please use a valid @gmail.com email address";
+        }
+
         const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/;
-        if (!passwordRegex.test(formData.password)) tempErrors.password = "Incorrect password (min 8 chars, 1 Capital, 1 Symbol, 1 Number)";
+        if (!passwordRegex.test(formData.password)) {
+            tempErrors.password = "Password must be 8+ characters with 1 uppercase, 1 symbol, and 1 number";
+        }
+
         setErrors(tempErrors);
         return Object.keys(tempErrors).length === 0;
     };
@@ -22,48 +43,127 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validate()) return;
+        
+        setLoading(true);
+        setErrorMsg('');
+        setSuccessMsg('');
+
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/register', formData);
-            setMsg(res.data.message);
+            await authAPI.register(formData);
+            setSuccessMsg('✅ Registration successful! Redirecting to login...');
             setTimeout(() => navigate('/login'), 2000);
         } catch (err) {
-            setMsg(err.response?.data?.message || "User or Email already exists");
+            setErrorMsg(err.response?.data?.message || "Registration failed. Please try again.");
+        } finally {
+            setLoading(false);
         }
     };
 
-    const styles = {
-        container: { height: '100vh', backgroundColor: '#e3f2fd', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' },
-        header: { color: '#0d47a1', fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' },
-        formCard: { background: 'white', padding: '40px', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', textAlign: 'center', width: '350px' },
-        input: { width: '100%', padding: '10px', margin: '10px 0', borderRadius: '5px', border: '1px solid #ccc', boxSizing: 'border-box' },
-        passwordContainer: { position: 'relative' },
-        eyeIcon: { position: 'absolute', right: '10px', top: '20px', cursor: 'pointer' },
-        button: { width: '100%', padding: '10px', backgroundColor: '#1976d2', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' },
-        errorText: { color: 'red', fontSize: '12px', textAlign: 'left' },
-        successMsg: { color: 'green', marginTop: '10px' },
-        link: { color: '#1976d2', textDecoration: 'underline', cursor: 'pointer' }
-    };
-
     return (
-        <div style={styles.container}>
-            <h1 style={styles.header}>Job Listing Portal</h1>
-            <div style={styles.formCard}>
-                <h2>Register</h2>
-                <form onSubmit={handleSubmit}>
-                    <input type="text" placeholder="Username" style={styles.input} onChange={(e) => setFormData({...formData, username: e.target.value})} />
-                    <input type="text" placeholder="Email" style={styles.input} onChange={(e) => setFormData({...formData, email: e.target.value})} />
-                    {errors.email && <p style={styles.errorText}>{errors.email}</p>}
-                    <div style={styles.passwordContainer}>
-                        <input type={showPassword ? "text" : "password"} placeholder="Password" style={styles.input} onChange={(e) => setFormData({...formData, password: e.target.value})} />
-                        <span style={styles.eyeIcon} onClick={() => setShowPassword(!showPassword)}>
-                            {showPassword ? <FaEyeSlash /> : <FaEye />}
-                        </span>
+        <div className="register-container">
+            <div className="register-header">
+                <h1>🚀 Job Listing Portal</h1>
+                <p>Start Your Career Journey Today</p>
+            </div>
+            
+            <div className="register-card">
+                <h2>Create Account</h2>
+                <p className="register-subtitle">Join thousands of professionals</p>
+                
+                <form onSubmit={handleSubmit} className="register-form">
+                    <div className="form-field">
+                        <input 
+                            type="text" 
+                            placeholder="Username" 
+                            value={formData.username}
+                            onChange={(e) => setFormData({...formData, username: e.target.value})}
+                            className={errors.username ? 'error' : ''}
+                            required
+                        />
+                        {errors.username && <p className="error-text">{errors.username}</p>}
                     </div>
-                    {errors.password && <p style={styles.errorText}>{errors.password}</p>}
-                    <button type="submit" style={styles.button}>Register</button>
+
+                    <div className="form-field">
+                        <input 
+                            type="email" 
+                            placeholder="Email Address" 
+                            value={formData.email}
+                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            className={errors.email ? 'error' : ''}
+                            required
+                        />
+                        {errors.email && <p className="error-text">{errors.email}</p>}
+                    </div>
+
+                    <div className="form-field">
+                        <div className="password-wrapper">
+                            <input 
+                                type={showPassword ? "text" : "password"} 
+                                placeholder="Password" 
+                                value={formData.password}
+                                onChange={(e) => setFormData({...formData, password: e.target.value})}
+                                className={errors.password ? 'error' : ''}
+                                required
+                            />
+                            <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </span>
+                        </div>
+                        {errors.password && <p className="error-text">{errors.password}</p>}
+                    </div>
+
+                    <div className="form-field">
+                        <label className="role-label">I am a:</label>
+                        <div className="role-selector">
+                            <label className={`role-option ${formData.role === 'job_seeker' ? 'selected' : ''}`}>
+                                <input
+                                    type="radio"
+                                    name="role"
+                                    value="job_seeker"
+                                    checked={formData.role === 'job_seeker'}
+                                    onChange={(e) => setFormData({...formData, role: e.target.value})}
+                                />
+                                <span className="role-content">
+                                    <span className="role-icon">👔</span>
+                                    <span className="role-text">Job Seeker</span>
+                                </span>
+                            </label>
+                            <label className={`role-option ${formData.role === 'employer' ? 'selected' : ''}`}>
+                                <input
+                                    type="radio"
+                                    name="role"
+                                    value="employer"
+                                    checked={formData.role === 'employer'}
+                                    onChange={(e) => setFormData({...formData, role: e.target.value})}
+                                />
+                                <span className="role-content">
+                                    <span className="role-icon">🏢</span>
+                                    <span className="role-text">Employer</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    {errorMsg && (
+                        <div className="alert-error">
+                            {errorMsg}
+                        </div>
+                    )}
+
+                    {successMsg && (
+                        <div className="alert-success">
+                            {successMsg}
+                        </div>
+                    )}
+
+                    <button type="submit" className="register-btn" disabled={loading}>
+                        {loading ? '🔄 Creating Account...' : '✨ Create Account'}
+                    </button>
                 </form>
-                {msg && <p style={styles.successMsg}>{msg}</p>}
-                <p style={{marginTop:'15px'}}>Already have an account? <span onClick={() => navigate('/login')} style={styles.link}>login</span></p>
+
+                <p className="footer-text">
+                    Already have an account? <span onClick={() => navigate('/login')} className="link">Sign in</span>
+                </p>
             </div>
         </div>
     );

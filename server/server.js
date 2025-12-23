@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
-// const userRoutes = require('./routes/userRoutes'); // TODO: Add user profile routes
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/auth', authRoutes);
-// app.use('/api/users', userRoutes); // TODO: Uncomment when userRoutes is ready
+app.use('/api/users', userRoutes);
 
 // Health check route
 app.get('/', (req, res) => {

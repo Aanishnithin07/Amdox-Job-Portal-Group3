@@ -1,15 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FcGoogle } from 'react-icons/fc';
-import { MdEmail, MdWork, MdSchool, MdGroups } from 'react-icons/md';
+import { MdWork, MdSchool, MdGroups } from 'react-icons/md';
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const Home = () => {
     const navigate = useNavigate();
-
-    const handleGoogleLogin = () => {
-        window.location.href = "https://accounts.google.com/";
-    };
 
     const styles = {
         container: {
@@ -166,14 +161,14 @@ const Home = () => {
                     </p>
                     
                     <div style={styles.authCard}>
-                        <button className="interactive-btn" onClick={handleGoogleLogin} style={{width: '100%', padding: '14px', borderRadius: '30px', border: '1px solid #dadce0', backgroundColor: '#fff', marginBottom: '15px'}}>
-                            <FcGoogle size={24} /> Continue with Google
+                        <button className="interactive-btn" onClick={() => navigate('/register')} style={{width: '100%', padding: '16px 24px', borderRadius: '12px', border: 'none', backgroundColor: '#004aad', color: 'white', fontSize: '18px', fontWeight: '600', marginBottom: '15px'}}>
+                            Get Started - It's Free
                         </button>
-                        <button className="interactive-btn" onClick={() => navigate('/register')} style={{width: '100%', padding: '14px', borderRadius: '30px', border: 'none', backgroundColor: '#004aad', color: 'white'}}>
-                            <MdEmail size={24} /> Continue with Email
+                        <button className="interactive-btn" onClick={() => navigate('/login')} style={{width: '100%', padding: '16px 24px', borderRadius: '12px', border: '2px solid #004aad', backgroundColor: 'white', color: '#004aad', fontSize: '18px', fontWeight: '600'}}>
+                            Sign In to Your Account
                         </button>
-                        <p style={{marginTop: '20px', fontSize: '12px', color: '#777'}}>
-                            By clicking Continue, you agree to JobPoint’s User Agreement and Privacy Policy.
+                        <p style={{marginTop: '20px', fontSize: '13px', color: '#777', textAlign: 'center'}}>
+                            Join thousands of professionals finding their dream jobs
                         </p>
                     </div>
                 </div>

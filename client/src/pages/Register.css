@@ -90,7 +90,11 @@
     font-size: 16px;
     transition: all 0.3s ease;
     box-sizing: border-box;
-    background: #f9f9f9;
+    background: #ffffff;
+    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    position: relative;
+    z-index: 1;
 }
 
 .form-field input:focus {
@@ -107,6 +111,11 @@
 
 .password-wrapper {
     position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    padding-right: 50px !important;
 }
 
 .eye-icon {
@@ -118,6 +127,8 @@
     color: #666;
     font-size: 18px;
     transition: color 0.3s ease;
+    z-index: 10;
+    pointer-events: auto;
 }
 
 .eye-icon:hover {
@@ -152,7 +163,9 @@
     border-radius: 12px;
     padding: 15px;
     transition: all 0.3s ease;
-    background: #f9f9f9;
+    background: #ffffff;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .role-option input[type="radio"] {

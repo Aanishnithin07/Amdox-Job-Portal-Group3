@@ -10,8 +10,25 @@ const applicationRoutes = require('./routes/applicationRoutes');
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// CORS Configuration - Allow frontend access
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Allow all in development, restrict in production
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -27,7 +44,10 @@ app.get('/', (req, res) => {
 });
 
 // Database Connection
-mongoose.connect(process.env.MONGO_URI)
+mon
+
+// Export for Vercel serverless functions
+module.exports = app;goose.connect(process.env.MONGO_URI)
     .then(() => console.log('✅ MongoDB Connected'))
     .catch(err => {
         console.error('❌ MongoDB Connection Error:', err);

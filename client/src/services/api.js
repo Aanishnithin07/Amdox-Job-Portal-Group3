@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-// API Base URL - Update this if backend port changes
-const API_BASE_URL = 'http://localhost:5001/api';
+// API Base URL - Automatically detects environment
+const API_BASE_URL = import.meta.env.VITE_API_URL || 
+                     (import.meta.env.MODE === 'production' 
+                       ? 'https://your-backend-url.vercel.app/api' 
+                       : 'http://localhost:5001/api');
 
 // Create axios instance with default config
 const api = axios.create({
@@ -9,7 +12,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000, // 10 seconds
+  timeout: 15000, // 15 seconds for production
 });
 
 // Request interceptor - Add JWT token to all requests

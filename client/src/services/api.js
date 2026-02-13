@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 // API Base URL - Automatically detects environment
-const API_BASE_URL = import.meta.env.VITE_API_URL || 
-                     (import.meta.env.MODE === 'production' 
-                       ? 'https://your-backend-url.vercel.app/api' 
-                       : 'http://localhost:5001/api');
+const API_BASE_URL = import.meta.env.VITE_API_URL ||
+  (import.meta.env.MODE === 'production'
+    ? 'https://your-backend-url.vercel.app/api'
+    : 'http://localhost:5001/api');
 
 // Create axios instance with default config
 const api = axios.create({
@@ -53,6 +53,25 @@ export const authAPI = {
 export const userAPI = {
   getProfile: () => api.get('/users/profile'),
   updateProfile: (profileData) => api.put('/users/profile', profileData),
+};
+
+// Job API
+export const jobAPI = {
+  getAllJobs: () => api.get('/jobs'),
+  getMyJobs: () => api.get('/jobs/my-jobs'),
+  getJobById: (id) => api.get(`/jobs/${id}`),
+  createJob: (jobData) => api.post('/jobs', jobData),
+  updateJob: (id, jobData) => api.put(`/jobs/${id}`, jobData),
+  deleteJob: (id) => api.delete(`/jobs/${id}`),
+};
+
+// Application API
+export const applicationAPI = {
+  applyToJob: (jobId) => api.post(`/applications/${jobId}`),
+  getMyApplications: () => api.get('/applications/my-applications'),
+  getJobApplicants: (jobId) => api.get(`/applications/job/${jobId}`),
+  updateStatus: (id, status) => api.put(`/applications/${id}/status`, { status }),
+  deleteApplication: (id) => api.delete(`/applications/${id}`),
 };
 
 export default api;

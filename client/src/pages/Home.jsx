@@ -35,18 +35,18 @@ const Home = () => {
             flexWrap: 'wrap'
         },
         heroLeft: { flex: 1, minWidth: '320px' },
-        mainTitle: { 
-            fontSize: '52px', 
-            fontWeight: '900', 
+        mainTitle: {
+            fontSize: '52px',
+            fontWeight: '900',
             color: '#004aad',
             textShadow: '3px 6px 10px rgba(0,0,0,0.15)',
             marginBottom: '10px',
             animation: 'fadeInUp 1s ease-out'
         },
         subTitle: { fontSize: '22px', marginBottom: '30px', color: '#444' },
-        highlightText: { 
-            backgroundColor: '#FFD700', 
-            padding: '2px 12px', 
+        highlightText: {
+            backgroundColor: '#FFD700',
+            padding: '2px 12px',
             borderRadius: '8px',
             fontWeight: 'bold',
             boxShadow: '4px 4px 0px #b8860b'
@@ -144,8 +144,8 @@ const Home = () => {
             <nav style={styles.nav}>
                 <div style={styles.logo} onClick={() => navigate('/')}>JobPoint</div>
                 <div>
-                    <span className="nav-link" onClick={() => navigate('/register')} style={{marginRight: '20px', fontSize: '16px', fontWeight: 'bold', color: '#444'}}>Join now</span>
-                    <button className="interactive-btn" onClick={() => navigate('/login')} style={{padding: '10px 24px', borderRadius: '25px', border: '2px solid #004aad', color: '#004aad', fontSize: '16px', background: 'white', display:'inline-flex'}}>Sign in</button>
+                    <span className="nav-link" onClick={() => navigate('/register')} style={{ marginRight: '20px', fontSize: '16px', fontWeight: 'bold', color: '#444' }}>Join now</span>
+                    <button className="interactive-btn" onClick={() => navigate('/login')} style={{ padding: '10px 24px', borderRadius: '25px', border: '2px solid #004aad', color: '#004aad', fontSize: '16px', background: 'white', display: 'inline-flex' }}>Sign in</button>
                 </div>
             </nav>
 
@@ -159,25 +159,25 @@ const Home = () => {
                     <p style={styles.subTitle}>
                         <b>Find the right job</b> for you among millions of listings and top companies hiring.
                     </p>
-                    
+
                     <div style={styles.authCard}>
-                        <button className="interactive-btn" onClick={() => navigate('/register')} style={{width: '100%', padding: '16px 24px', borderRadius: '12px', border: 'none', backgroundColor: '#004aad', color: 'white', fontSize: '18px', fontWeight: '600', marginBottom: '15px'}}>
-                            Get Started - It's Free
+                        <button className="interactive-btn" onClick={() => navigate('/jobs')} style={{ width: '100%', padding: '16px 24px', borderRadius: '12px', border: 'none', backgroundColor: '#004aad', color: 'white', fontSize: '18px', fontWeight: '600', marginBottom: '15px' }}>
+                            Browse Jobs
                         </button>
-                        <button className="interactive-btn" onClick={() => navigate('/login')} style={{width: '100%', padding: '16px 24px', borderRadius: '12px', border: '2px solid #004aad', backgroundColor: 'white', color: '#004aad', fontSize: '18px', fontWeight: '600'}}>
+                        <button className="interactive-btn" onClick={() => navigate('/login')} style={{ width: '100%', padding: '16px 24px', borderRadius: '12px', border: '2px solid #004aad', backgroundColor: 'white', color: '#004aad', fontSize: '18px', fontWeight: '600' }}>
                             Sign In to Your Account
                         </button>
-                        <p style={{marginTop: '20px', fontSize: '13px', color: '#777', textAlign: 'center'}}>
+                        <p style={{ marginTop: '20px', fontSize: '13px', color: '#777', textAlign: 'center' }}>
                             Join thousands of professionals finding their dream jobs
                         </p>
                     </div>
                 </div>
 
-                <div style={{flex: 1, textAlign: 'center'}}>
-                    <img 
-                        src="https://img.freepik.com/premium-photo/online-job-search-brisk-website-worker-search-job-opportunities_31965-683808.jpg?w=740" 
-                        alt="Professional working" 
-                        style={{width: '95%', borderRadius: '20px', boxShadow: '0 40px 70px rgba(0,0,0,0.25)', border: '6px solid white'}} 
+                <div style={{ flex: 1, textAlign: 'center' }}>
+                    <img
+                        src="https://img.freepik.com/premium-photo/online-job-search-brisk-website-worker-search-job-opportunities_31965-683808.jpg?w=740"
+                        alt="Professional working"
+                        style={{ width: '95%', borderRadius: '20px', boxShadow: '0 40px 70px rgba(0,0,0,0.25)', border: '6px solid white' }}
                     />
                 </div>
             </div>
@@ -186,46 +186,46 @@ const Home = () => {
             <div style={styles.bodyStats}>
                 <div className="stat-card">
                     <MdWork size={40} color="#004aad" />
-                    <h2 style={{fontSize: '32px', margin: '10px 0'}}>10k+</h2>
-                    <p style={{color: '#666', fontWeight: 'bold'}}>Jobs Available</p>
+                    <h2 style={{ fontSize: '32px', margin: '10px 0' }}>10k+</h2>
+                    <p style={{ color: '#666', fontWeight: 'bold' }}>Jobs Available</p>
                 </div>
                 <div className="stat-card">
                     <MdGroups size={40} color="#004aad" />
-                    <h2 style={{fontSize: '32px', margin: '10px 0'}}>500+</h2>
-                    <p style={{color: '#666', fontWeight: 'bold'}}>Companies Hiring</p>
+                    <h2 style={{ fontSize: '32px', margin: '10px 0' }}>500+</h2>
+                    <p style={{ color: '#666', fontWeight: 'bold' }}>Companies Hiring</p>
                 </div>
                 <div className="stat-card">
                     <MdSchool size={40} color="#004aad" />
-                    <h2 style={{fontSize: '32px', margin: '10px 0'}}>5k+</h2>
-                    <p style={{color: '#666', fontWeight: 'bold'}}>For Graduates</p>
+                    <h2 style={{ fontSize: '32px', margin: '10px 0' }}>5k+</h2>
+                    <p style={{ color: '#666', fontWeight: 'bold' }}>For Graduates</p>
                 </div>
                 <div className="stat-card">
                     <MdWork size={40} color="#004aad" />
-                    <h2 style={{fontSize: '32px', margin: '10px 0'}}>2k+</h2>
-                    <p style={{color: '#666', fontWeight: 'bold'}}>Internships</p>
+                    <h2 style={{ fontSize: '32px', margin: '10px 0' }}>2k+</h2>
+                    <p style={{ color: '#666', fontWeight: 'bold' }}>Internships</p>
                 </div>
                 <div className="stat-card">
                     <MdGroups size={40} color="#004aad" />
-                    <h2 style={{fontSize: '32px', margin: '10px 0'}}>5k+</h2>
-                    <p style={{color: '#666', fontWeight: 'bold'}}>For freshers</p>
+                    <h2 style={{ fontSize: '32px', margin: '10px 0' }}>5k+</h2>
+                    <p style={{ color: '#666', fontWeight: 'bold' }}>For freshers</p>
                 </div>
             </div>
 
             {/* Footer */}
             <footer style={styles.footer}>
-                <div style={{fontSize: '24px', display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '30px'}}>
+                <div style={{ fontSize: '24px', display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '30px' }}>
                     <FaFacebook className="footer-link" />
                     <FaTwitter className="footer-link" />
                     <FaLinkedin className="footer-link" />
                     <FaInstagram className="footer-link" />
                 </div>
-                <div style={{display: 'flex', justifyContent: 'center', gap: '30px', marginBottom: '20px', flexWrap: 'wrap', fontSize: '14px', color: '#bbb'}}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', marginBottom: '20px', flexWrap: 'wrap', fontSize: '14px', color: '#bbb' }}>
                     <span className="footer-link">Privacy Policy</span>
                     <span className="footer-link">Terms & Conditions</span>
                     <span className="footer-link">Cookie Policy</span>
                     <span className="footer-link">Community Guidelines</span>
                 </div>
-                <div style={{borderTop: '1px solid #333', paddingTop: '20px', fontSize: '14px', color: '#666'}}>
+                <div style={{ borderTop: '1px solid #333', paddingTop: '20px', fontSize: '14px', color: '#666' }}>
                     <p>JobPoint © 2025. Empowering Careers Worldwide.</p>
                 </div>
             </footer>

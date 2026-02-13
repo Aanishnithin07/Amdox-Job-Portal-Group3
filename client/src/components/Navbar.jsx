@@ -19,13 +19,37 @@ const Navbar = () => {
                 <Link to="/" className="navbar-logo">
                     <span className="logo-icon">💼</span> Job Portal
                 </Link>
-                
+
                 <ul className="navbar-menu">
                     {isAuthenticated ? (
                         <>
                             <li className="navbar-item">
+                                <Link to="/" className="navbar-link">
+                                    <FiHome /> Home
+                                </Link>
+                            </li>
+                            <li className="navbar-item">
+                                <Link to="/jobs" className="navbar-link">
+                                    Jobs
+                                </Link>
+                            </li>
+                            {user?.role === 'employer' && (
+                                <li className="navbar-item">
+                                    <Link to="/post-job" className="navbar-link">
+                                        Post Job
+                                    </Link>
+                                </li>
+                            )}
+                            {user?.role === 'job_seeker' && (
+                                <li className="navbar-item">
+                                    <Link to="/my-applications" className="navbar-link">
+                                        My Applications
+                                    </Link>
+                                </li>
+                            )}
+                            <li className="navbar-item">
                                 <Link to="/dashboard" className="navbar-link">
-                                    <FiHome /> Dashboard
+                                    Dashboard
                                 </Link>
                             </li>
                             <li className="navbar-item">

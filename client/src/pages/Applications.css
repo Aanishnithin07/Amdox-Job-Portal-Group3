@@ -1,0 +1,113 @@
+.applications-container {
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: #f0f2f5;
+    padding-top: 100px;
+}
+
+.applications-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.applications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #f0f2f5;
+    padding-bottom: 1rem;
+}
+
+.applications-header h2 {
+    color: #2c3e50;
+    margin: 0;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.applications-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.applications-table th,
+.applications-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.applications-table th {
+    font-weight: 600;
+    color: #4a5568;
+    background-color: #f8f9fa;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-applied {
+    background: #e2e8f0;
+    color: #4a5568;
+}
+
+.status-reviewed {
+    background: #fefcbf;
+    color: #b7791f;
+}
+
+.status-hired {
+    background: #c6f6d5;
+    color: #2f855a;
+}
+
+.status-rejected {
+    background: #fed7d7;
+    color: #c53030;
+}
+
+.action-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    transition: all 0.2s;
+}
+
+.btn-view {
+    background: #4299e1;
+    color: white;
+}
+
+.btn-withdraw {
+    background: #fc8181;
+    color: white;
+}
+
+.btn-status {
+    background: #edf2f7;
+    color: #4a5568;
+}
+
+.btn-status:hover {
+    background: #cbd5e0;
+}
+
+.no-data {
+    text-align: center;
+    padding: 3rem;
+    color: #718096;
+}
